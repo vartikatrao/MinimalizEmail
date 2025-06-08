@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MinimalizEmail</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo" onclick="showHome()">MinimalizEmail</div>
+                <nav class="nav">
+                    <a href="#" class="nav-item" onclick="showEmails('all')">All Emails</a>
+                    <a href="#" class="nav-item" onclick="showEmails('urgent')">Urgent</a>
+                    <a href="#" class="nav-item" onclick="showEmails('high-priority')">High Priority</a>
+                    <a href="#" class="nav-item" onclick="showEmails('meeting')">Meetings</a>
+                    <a href="#" class="nav-item" onclick="showEmails('issue')">Issues</a>
+                    <a href="#" class="nav-item" onclick="showTasks('all')">Tasks</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="home" class="home-screen">
+            <h1 class="hero-title">MinimalizEmail</h1>
+            <p class="hero-subtitle">Intelligent email management that processes, categorizes, and responds to your emails automatically. Spend less time in your inbox, more time on what matters.</p>
+            
+            <button class="cta-button" onclick="getStarted()">Get Started</button>
+        </section>
+
+        <section id="setup" class="setup-screen">
+            <div class="setup-container">
+                <h2 class="setup-title">Let's Personalize Your Experience</h2>
+                <p class="setup-subtitle">
+                    Help us understand your work context so we can better categorize and prioritize your emails according to your specific needs.
+                </p>
+
+                <div class="setup-form">
+                    <div class="form-group">
+                        <label class="form-label" for="workSummary">Please give a summary of your work:</label>
+                        <textarea
+                            class="form-textarea"
+                            id="workSummary"
+                            placeholder="e.g., I'm a software engineer working on web applications, managing a team of 5 developers, and handling client communications for enterprise projects..."
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="urgentEmails">What emails would you consider Urgent?</label>
+                        <textarea
+                            class="form-textarea"
+                            id="urgentEmails"
+                            placeholder="e.g., System outages, production issues, security alerts, client escalations, emergency meetings..."
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="highPriorityEmails">What emails would you consider High Priority?</label>
+                        <textarea
+                            class="form-textarea"
+                            id="highPriorityEmails"
+                            placeholder="e.g., Project deadlines, team updates, important client communications, budget approvals, strategic planning..."
+                        ></textarea>
+                    </div>
+                </div>
+
+                <div class="setup-buttons">
+                    <button class="setup-button secondary" onclick="skipSetup()">Skip for Now</button>
+                    <button class="setup-button" onclick="completeSetup()">Save & Continue</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="all-emails" class="email-section">
+            <h2 class="section-title">All Emails</h2>
+            <div class="email-grid" id="all-emails-grid">
+                <div class="loading">Loading emails...</div>
+            </div>
+        </section>
+
+        <section id="urgent-emails" class="email-section">
+            <h2 class="section-title">Urgent Emails</h2>
+            <div class="email-grid" id="urgent-emails-grid">
+                <div class="loading">Loading urgent emails...</div>
+            </div>
+        </section>
+
+        <section id="high-priority-emails" class="email-section">
+            <h2 class="section-title">High Priority Emails</h2>
+            <div class="email-grid" id="high-priority-emails-grid">
+                <div class="loading">Loading high priority emails...</div>
+            </div>
+        </section>
+
+        <section id="meeting-emails" class="email-section">
+            <h2 class="section-title">Meeting Emails</h2>
+            <div class="email-grid" id="meeting-emails-grid">
+                <div class="loading">Loading meeting emails...</div>
+            </div>
+        </section>
+
+        <section id="issue-emails" class="email-section">
+            <h2 class="section-title">Issue Emails</h2>
+            <div class="email-grid" id="issue-emails-grid">
+                <div class="loading">Loading issue emails...</div>
+            </div>
+        </section>
+
+        <section id="tasks-section" class="email-section">
+            <h2 class="section-title">Your Tasks</h2>
+            <div class="home-stats-grid">
+                <div class="stat-box">
+                    <h3>Pending Tasks</h3>
+                    <p id="pending-tasks-count">0</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Completed Tasks</h3>
+                    <p id="completed-tasks-count">0</p>
+                </div>
+                <div class="stat-box">
+                    <h3>High Priority Tasks</h3>
+                    <p id="high-priority-tasks-count">0</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Overdue Tasks</h3>
+                    <p id="overdue-tasks-count">0</p>
+                </div>
+            </div>
+            <div class="tasks-controls">
+                <button class="cta-button small" onclick="showAddTaskModal()">Add New Task</button>
+                <div class="task-filters">
+                    <button class="filter-button" onclick="loadTasks('all')">All</button>
+                    <button class="filter-button" onclick="loadTasks('pending')">Pending</button>
+                    <button class="filter-button" onclick="loadTasks('completed')">Completed</button>
+                    <button class="filter-button" onclick="loadTasks('high-priority')">High Priority</button>
+                </div>
+            </div>
+            <div class="tasks-container" id="tasks-container">
+                <div class="loading">Loading tasks...</div>
+            </div>
+        </section>
+    </main>
+
+    <div id="emailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalSubject">Email Subject</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-title">From</div>
+                <div class="detail-content" id="modalFrom"></div>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-title">Email Body</div>
+                <div class="detail-content" id="modalBody"></div>
+            </div>
+
+            <div class="detail-section">
+                <div class="detail-title">Tags</div>
+                <div class="email-tags" id="modalTags"></div>
+            </div>
+
+            <div id="modalActions"></div>
+
+            <div class="detail-section">
+                <div class="detail-title">Generated Reply</div>
+                <div class="action-box">
+                    <textarea class="reply-textarea" id="replyText" placeholder="Generated reply will appear here..."></textarea>
+                    <button class="send-button" onclick="sendReply()">Send Reply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="addTaskModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Task</h2>
+                <button class="close-btn" onclick="closeAddTaskModal()">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="taskTitle">Task Title:</label>
+                <input type="text" id="taskTitle" class="form-input" placeholder="e.g., Follow up on client proposal" required>
+            </div>
+            <div class="form-group">
+                <label for="taskDescription">Description (Optional):</label>
+                <textarea id="taskDescription" class="form-textarea" placeholder="e.g., Detail proposal points and next steps"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="taskPriority">Priority:</label>
+                <select id="taskPriority" class="form-select">
+                    <option value="normal">Normal</option>
+                    <option value="high">High</option>
+                    <option value="low">Low</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="taskDueDate">Due Date (Optional):</label>
+                <input type="date" id="taskDueDate" class="form-input">
+            </div>
+            <button class="cta-button" onclick="saveNewTask()">Save Task</button>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
