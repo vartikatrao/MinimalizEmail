@@ -126,7 +126,7 @@ TELEGRAM_CHAT_ID=your_chat_id
 ### 7. Start the Backend
 
 ```bash
-python app.py
+flask run
 ```
 
 Backend will be available at `http://localhost:5000`
