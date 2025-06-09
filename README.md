@@ -220,7 +220,7 @@ This project was built for the [Postmark Challenge: Inbox Innovators](https://de
 
 ## 🔗 Links
 
-* **Live Demo**: \[Your deployed app URL]
+* **Demo**: [Youtube](https://youtu.be/jIBCTEd91SA)
 * **GitHub Repository**: https://github.com/vartikatrao/MinimalizEmail
 * **Postmark Challenge**: [https://dev.to/challenges/postmark](https://dev.to/challenges/postmark)
 
