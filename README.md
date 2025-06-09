@@ -3,6 +3,8 @@
 
 **Transform your inbox from chaos to clarity with AI-powered email intelligence.**
 
+This is a submission for the [Postmark Challenge: Inbox Innovators](https://dev.to/vartikatrao/minimalizemail-ai-powered-email-management-for-maximum-productivity-45gj).
+
 
 ## ✨ Features
 
