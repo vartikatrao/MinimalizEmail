@@ -1,8 +1,8 @@
 # MinimalizEmail 🚀
+![image](https://github.com/user-attachments/assets/0d752a28-8b47-4fb9-b10a-94162bb31aba)
 
 **Transform your inbox from chaos to clarity with AI-powered email intelligence.**
 
-MinimalizEmail is an intelligent email management system that automatically classifies, summarizes, and takes action on your emails. Instead of drowning in endless messages, let AI handle the heavy lifting while you focus on what matters most.
 
 ## ✨ Features
 
