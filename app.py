@@ -103,7 +103,7 @@ class Task(db.Model):
     email = db.relationship('Email', backref=db.backref('tasks', lazy=True))
 
 os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
-vanilla_model = ChatGoogleGenerativeAI(model="models/gemini-1.5-pro-latest", temperature=0.3)
+vanilla_model = ChatGoogleGenerativeAI(model="models/gemini-2.0-flash-001", temperature=0.3)
 
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
@@ -351,7 +351,7 @@ def store_tool_outputs(state: AgentState) -> AgentState:
 
 tools = [create_calendar_event, create_jira_ticket]
 model = ChatGoogleGenerativeAI(
-    model="gemini-1.5-pro-latest",
+    model="gemini-2.0-flash-001",
     temperature=0.1
 ).bind_tools(tools)
 
